@@ -60,3 +60,17 @@ services:
             debezium-kafka:
               properties:
                 bootstrap.servers: "kafka:29092"
+
+  debezium-init:
+      image: curlimages/curl:latest
+      depends_on: [connect]
+      volumes:
+        - ./connector-config.json:/connector-config.json
+      command: >
+        /bin/sh -c "
+        echo 'Waiting for Debezium Connect to start...';
+        while ! curl -s http://connect:8083/ > /dev/null; do sleep 5; done;
+        echo 'Debezium is up! Registering connector...';
+        curl -X POST -H 'Content-Type: application/json' --data @/connector-config.json http://connect:8083/connectors/;
+        echo 'Connector registered.';
+        "
