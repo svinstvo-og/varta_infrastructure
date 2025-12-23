@@ -5,10 +5,10 @@
     "database.hostname": "postgres",
     "database.port": "5432",
     "database.user": "postgres",
-    "database.password": "postgres",
-    "database.dbname": "mydb",
+    "database.password": "zxca",
+    "database.dbname": "ingestion-service-db",
     "topic.prefix": "dbserver1",
-    "table.include.list": "public.users",
+    "table.include.list": "public.credit_trans",
     "plugin.name": "pgoutput",
     "key.converter": "org.apache.kafka.connect.json.JsonConverter",
     "value.converter": "org.apache.kafka.connect.json.JsonConverter"
